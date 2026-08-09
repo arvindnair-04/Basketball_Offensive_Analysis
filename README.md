@@ -68,21 +68,12 @@ The Admin Analytics page summarizes registered and active users, sessions, page 
 Page views are de-duplicated across Streamlit widget reruns: an event is recorded when the user navigates to a different page, rather than whenever a filter causes the script to rerun. Player views are similarly recorded only when the selected primary player changes.
 
 
-## Separate administrator dashboard
+## Administrator access
 
-The product-usage dashboard now has a completely separate login and Streamlit entry point.
-
-Run the normal scouting application with:
+The scouting dashboard and administrator analytics interface run from the same Streamlit application:
 
 ```bash
 streamlit run app.py
-```
-
-Run the administrator application in a second terminal with:
-
-```bash
-streamlit run admin_app.py --server.port 8502
-```
 
 Default local prototype administrator credentials:
 
