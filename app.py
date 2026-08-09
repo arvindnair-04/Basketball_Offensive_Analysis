@@ -9,6 +9,7 @@ from pathlib import Path
 import streamlit as st
 
 from usage_tracking import initialize_usage_tracking, log_event
+from admin_auth import (authenticate_admin, clear_admin_session, initialize_admin_database, initialize_admin_session, is_admin_logged_in, set_admin_session,)
 
 # Streamlit page configuration
 st.set_page_config(page_title="Basketball Offensive Scouting Dashboard", page_icon="🏀", layout="wide", initial_sidebar_state="expanded")
@@ -177,7 +178,8 @@ def initialize_session_state() -> None:
         "first_name": None,
         "last_name": None,
         "full_name": None,
-        "role": None
+        "role": None,
+        "show_admin_login": False,
     }
     for key, value in default_values.items():
         if key not in st.session_state:
@@ -217,7 +219,7 @@ def log_out() -> None:
 
 # Authentication page
 def authentication_page() -> None:
-    """Display login and profile-creation forms."""
+    """Display user login/registration or the administrator login form."""
     left_space, content_column, right_space = st.columns([1, 1.3, 1])
     with content_column:
         st.markdown(
@@ -227,15 +229,74 @@ def authentication_page() -> None:
                 <h1>Offensive Scouting Dashboard</h1>
             </div>
             """,
-            unsafe_allow_html=True
+            unsafe_allow_html=True,
         )
+
+        # Administrator login is intentionally separated from normal scout accounts, while still running inside the same Streamlit deployment/database.
+        if st.session_state.get("show_admin_login", False):
+            st.markdown("### 🔐 Administrator Login")
+            st.caption("Administrator access is restricted to product-usage analytics.")
+
+            with st.form(key="embedded_admin_login_form", clear_on_submit=False):
+                admin_username = st.text_input(
+                    "Admin username",
+                    placeholder="Enter administrator username",
+                    key="embedded_admin_username",
+                )
+                admin_password = st.text_input(
+                    "Admin password",
+                    type="password",
+                    placeholder="Enter administrator password",
+                    key="embedded_admin_password",
+                )
+                admin_submitted = st.form_submit_button(
+                    "Log in as administrator",
+                    use_container_width=True,
+                    type="primary",
+                )
+
+            if admin_submitted:
+                if not admin_username.strip() or not admin_password:
+                    st.warning("Enter both the administrator username and password.")
+                elif authenticate_admin(admin_username, admin_password):
+                    set_admin_session(admin_username)
+                    st.session_state.show_admin_login = False
+                    st.rerun()
+                else:
+                    st.error("Incorrect administrator username or password.")
+
+            if st.button(
+                "← Back to user login",
+                use_container_width=True,
+                key="back_to_user_login",
+            ):
+                st.session_state.show_admin_login = False
+                st.rerun()
+
+            return
+
         login_tab, register_tab = st.tabs(["Log in", "Create profile"])
-        # Login form
+
+        # Normal scout/user login form
         with login_tab:
             with st.form(key="login_form", clear_on_submit=False):
-                username = st.text_input("Username", placeholder="Enter your username", key="login_username")
-                password = st.text_input("Password", type="password", placeholder="Enter your password", key="login_password")
-                login_submitted = st.form_submit_button("Log in", use_container_width=True, type="primary")
+                username = st.text_input(
+                    "Username",
+                    placeholder="Enter your username",
+                    key="login_username",
+                )
+                password = st.text_input(
+                    "Password",
+                    type="password",
+                    placeholder="Enter your password",
+                    key="login_password",
+                )
+                login_submitted = st.form_submit_button(
+                    "Log in",
+                    use_container_width=True,
+                    type="primary",
+                )
+
             if login_submitted:
                 if not username.strip() or not password:
                     st.warning("Enter both your username and password.")
@@ -246,31 +307,66 @@ def authentication_page() -> None:
                     else:
                         set_authenticated_user(user)
                         st.rerun()
+
         # Registration form
         with register_tab:
             with st.form(key="registration_form", clear_on_submit=True):
                 first_name = st.text_input("First name", placeholder="Enter your first name")
                 last_name = st.text_input("Last name", placeholder="Enter your last name")
-                new_username = st.text_input("Username", placeholder="Choose a unique username", help=("Use 3–30 letters, numbers or underscores. Usernames are not case-sensitive."))
-                new_password = st.text_input("Password", type="password", placeholder="Create a password", help=("Use at least 8 characters, including one letter and one number."))
-                confirm_password = st.text_input("Confirm password", type="password", placeholder="Enter the password again")
-                registration_submitted = (st.form_submit_button("Create profile", use_container_width=True, type="primary"))
+                new_username = st.text_input(
+                    "Username",
+                    placeholder="Choose a unique username",
+                    help="Use 3–30 letters, numbers or underscores. Usernames are not case-sensitive.",
+                )
+                new_password = st.text_input(
+                    "Password",
+                    type="password",
+                    placeholder="Create a password",
+                    help="Use at least 8 characters, including one letter and one number.",
+                )
+                confirm_password = st.text_input(
+                    "Confirm password",
+                    type="password",
+                    placeholder="Enter the password again",
+                )
+                registration_submitted = st.form_submit_button(
+                    "Create profile",
+                    use_container_width=True,
+                    type="primary",
+                )
+
             if registration_submitted:
                 if new_password != confirm_password:
                     st.error("The passwords do not match.")
                 else:
-                    account_created, message = create_user(username=new_username, first_name=first_name, last_name=last_name, password=new_password)
+                    account_created, message = create_user(
+                        username=new_username,
+                        first_name=first_name,
+                        last_name=last_name,
+                        password=new_password,
+                    )
                     if account_created:
                         st.success(f"{message} You can now log in.")
                     else:
                         st.error(message)
+
         st.caption("Create a profile or sign in to access the dashboard.")
+        st.divider()
+        if st.button(
+            "🔐 Administrator Login",
+            use_container_width=True,
+            key="open_admin_login",
+        ):
+            st.session_state.show_admin_login = True
+            st.rerun()
 
 
 # Application initialization
 initialize_database()
 initialize_usage_tracking()
+initialize_admin_database()
 initialize_session_state()
+initialize_admin_session()
 
 # Shared dashboard theme and overview
 from analytics import load_data
@@ -413,9 +509,27 @@ overview = st.Page(render_overview, title="Overview", icon=":material/dashboard:
 shooting = st.Page("pages/shooting_analysis.py", title="Shooting Analysis", icon=":material/sports_basketball:")
 pick_and_roll = st.Page("pages/pick_and_roll_analysis.py", title="Pick-and-Roll Analysis", icon=":material/schema:")
 player_profiles = st.Page("pages/player_profiles.py", title="Player Profile", icon=":material/groups:")
+admin_analytics = st.Page("pages/admin_analytics.py", title="Admin Analytics", icon=":material/analytics:", default=True)
+
+
+def admin_log_out() -> None:
+    """End only the administrator session and return to the shared login page."""
+    clear_admin_session()
+    st.session_state.show_admin_login = False
+    st.rerun()
+
 
 # Authenticated navigation
-if st.session_state.logged_in:
+if is_admin_logged_in():
+    with st.sidebar:
+        st.markdown("## 🔐 Administration")
+        st.write(f"Signed in as **{st.session_state.admin_username}**")
+        st.caption("Product usage analytics")
+        st.divider()
+        if st.button("Log out of admin", use_container_width=True, icon=":material/logout:"):
+            admin_log_out()
+    navigation = st.navigation({"Administration": [admin_analytics]})
+elif st.session_state.logged_in:
     with st.sidebar:
         st.markdown("## 🏀 Offensive Scouting")
         st.write(f"Welcome, **{st.session_state.full_name}**")
@@ -426,4 +540,5 @@ if st.session_state.logged_in:
     navigation = st.navigation({"Analysis": [overview, shooting, pick_and_roll, player_profiles]})
 else:
     navigation = st.navigation([authentication], position="hidden")
+
 navigation.run()
