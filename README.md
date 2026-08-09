@@ -54,7 +54,7 @@ The supplied files contain 295 shooting rows and 292 pick-and-roll rows. They jo
 
 ## Admin usage analytics
 
-The project includes an administrator-only **Admin Analytics** page. The first profile created in a fresh database becomes the administrator; in the supplied prototype database the existing `arvindnair04` profile is assigned the administrator role. All later registrations receive the standard `user` role.
+The application includes an administrator-only **Admin Analytics** interface. Administrator authentication is separate from normal user accounts and is accessed through the **Administrator Login** option on the application's opening login screen. Normal registered users do not see or have access to the Admin Analytics interface.
 
 Usage events are stored locally in the same SQLite database (`users.db`) so the application remains self-contained. The tracker records:
 
