@@ -74,6 +74,7 @@ The scouting dashboard and administrator analytics interface run from the same S
 
 ```bash
 streamlit run app.py
+```
 
 Default local prototype administrator credentials:
 
