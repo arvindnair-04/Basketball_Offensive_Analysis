@@ -2,170 +2,63 @@
 
 ### Liga ACB 2024–25 | Shooting • Pick-and-Roll • Player Profiling
 
-A reproducible **Streamlit scouting application** for exploring season-level offensive shooting and pick-and-roll performance from the supplied **2024–25 Spanish basketball dataset**.
+A reproducible **Streamlit scouting application** built from the provided 2024–25 Spanish basketball season aggregate data.
 
-The application is designed around one central scouting problem:
+The dashboard is designed around one central question:
 
-> **How can we identify and compare offensive players without being misled by role, workload, shot profile, or small sample sizes?**
+> **How can a scout compare offensive players without being misled by role, workload, shot profile, or small sample sizes?**
 
-Rather than simply visualizing the supplied CSV columns, the application transforms the aggregate data into interpretable offensive profiles built around:
-
-- Shooting volume
-- Scoring efficiency
-- Shot location
-- Shot creation
-- Pick-and-roll involvement
-- Pick-and-roll role
-- Decision-making
-- Sample reliability
-- Player archetypes
-- Statistical similarity
-
----
-
-## Live Application
-
-**Streamlit Deployment**
-
+**Live App:**  
 https://basketballoffensiveanalysis.streamlit.app
 
 ---
 
-## Project Objective
+## Overview
 
-The objective of this project is to create an analyst-facing tool that supports three stages of a basketball scouting workflow:
+The application supports three stages of a scouting workflow:
 
-### 1. Discovery
+1. **Discovery** — identify interesting players across the league.
+2. **Contextualization** — understand how those players generate offensive production.
+3. **Player Evaluation** — inspect individual strengths, weaknesses, roles, reliability, and comparable players.
 
-Identify players with interesting offensive profiles across the league.
-
-### 2. Contextualization
-
-Understand **how** each player generates their offensive production.
-
-### 3. Player Evaluation
-
-Investigate an individual player's:
-
-- strengths;
-- weaknesses;
-- offensive role;
-- shooting profile;
-- pick-and-roll behavior;
-- sample reliability;
-- league-relative performance;
-- statistical peers.
-
-The application therefore focuses on three main analytical questions.
-
-### Shooting
-
-> **Where does a player shoot, how efficiently do they score, and how is that production created?**
-
-### Pick-and-Roll
-
-> **How does a player contribute as a ball handler or screener, and how efficiently do they convert those opportunities?**
-
-### Player Profiling
-
-> **What type of offensive player is this, how does the player compare with qualified league peers, and which players have similar statistical profiles?**
-
-The goal is **not** to produce a single definitive ranking of players.
-
-Instead, the dashboard provides structured evidence that can support a scout or analyst during player investigation.
+The goal is **not to produce one definitive player ranking**, but to provide evidence that helps a scout decide which players deserve further investigation.
 
 ---
 
-# Application Overview
+## Application Pages
 
-The application contains four main analyst-facing sections.
+### Shooting Analysis
 
----
+Evaluates players using both **volume and efficiency**.
 
-## Offensive Analysis
+Features include:
 
-The landing page provides league-level context before individual player evaluation.
+- Interactive metric-vs-metric league scatterplots
+- Shooting volume and efficiency leaderboards
+- Rim, paint, mid-range, and three-point profiles
+- Catch-and-shoot vs. off-dribble analysis
+- Contested vs. uncontested shooting
+- Blocked-shot vulnerability
+- Stabilized zone efficiency
+- Shooting-style classifications
 
-It summarizes:
-
-- dataset coverage;
-- offensive player distributions;
-- shooting-style distributions;
-- pick-and-roll role distributions;
-- offensive workload;
-- league-wide player composition.
-
-This page is designed to answer:
-
-> **What does the offensive landscape of the league look like before evaluating an individual player?**
-
----
-
-# Shooting Analysis
-
-The Shooting Analysis page evaluates players across both **volume and efficiency** rather than ranking shooting percentages in isolation.
-
-The page includes:
-
-- configurable player qualification thresholds;
-- interactive league scatterplots;
-- shooting-volume leaderboards;
-- shooting-efficiency leaderboards;
-- shot-zone distribution;
-- rim analysis;
-- short-mid-range / paint analysis;
-- long-mid-range analysis;
-- three-point analysis;
-- stabilized zone finishing;
-- blocked-shot vulnerability;
-- contested vs. uncontested shooting;
-- catch-and-shoot analysis;
-- off-dribble creation;
-- shooting-style classification.
-
-The interactive league map allows analysts to independently select the metrics displayed on each axis.
-
-This makes it possible to investigate different scouting questions without building a separate visualization for every hypothesis.
-
-Examples include:
+Example scouting questions:
 
 ```text
-Shot Volume vs True Shooting Percentage
+Who combines high shooting volume with strong efficiency?
 
-Three-Point Attempt Rate vs Three-Point Efficiency
+Which players provide reliable floor spacing?
 
-Rim Frequency vs Rim Finishing
+Who creates efficiently off the dribble?
 
-Catch-and-Shoot Efficiency vs Off-Dribble Efficiency
+Which players consistently generate rim pressure?
 ```
 
 ---
 
-# Pick-and-Roll Analysis
+### Pick-and-Roll Analysis
 
-Pick-and-roll performance is evaluated separately for:
-
-- **Ball Handlers**
-- **Screeners**
-
-This distinction is important because the responsibilities and meaningful metrics for each role are different.
-
-The Pick-and-Roll page includes:
-
-- role-specific qualification filters;
-- pick volume;
-- picks per game;
-- points per pick;
-- shot rate;
-- pass rate;
-- assist-opportunity rate;
-- turnover rate;
-- successful-action rate;
-- role-specific percentiles;
-- defensive coverage analysis;
-- screen-location analysis.
-
-Players are also classified into PnR roles:
+Separates players into meaningful PnR roles:
 
 ```text
 Ball Handler
@@ -174,91 +67,59 @@ Dual Role
 Low PnR Sample
 ```
 
-This prevents players with fundamentally different offensive responsibilities from being interpreted as if they belonged to one homogeneous population.
+Metrics include:
+
+- Pick volume
+- Picks per game
+- Points per pick
+- Shot rate
+- Pass rate
+- Assist-opportunity rate
+- Turnover rate
+- Successful-action rate
+- Role-specific percentiles
+- Defensive coverage and screen-location splits
+
+Handlers and screeners are evaluated separately because their responsibilities within the same action are fundamentally different.
 
 ---
 
-# Player Profile
+### Player Profile
 
-The Player Profile page moves the workflow from **league exploration** to **individual scouting**.
+Combines shooting and pick-and-roll information into an individual scouting profile.
 
-It combines shooting and pick-and-roll information into a single player-level view.
+Includes:
 
-The profile includes:
-
-- headline offensive statistics;
-- league percentile radar;
-- optional player-to-player comparison;
-- shot-diet visualization;
-- zone efficiency;
-- blocked-shot vulnerability;
-- contested/uncontested performance;
-- catch-and-shoot creation;
-- off-dribble creation;
-- pick-and-roll role;
-- PnR efficiency;
-- decision-making indicators;
-- statistical player similarity.
+- Headline offensive statistics
+- League percentile radar
+- Player comparison
+- Shot diet
+- Zone efficiency
+- Creation style
+- PnR behavior
+- Reliability indicators
+- Similar-player identification
 
 The page is designed to answer:
 
-> **What type of offensive player am I looking at, and what evidence supports that interpretation?**
+> **What type of offensive player is this, and what evidence supports that interpretation?**
 
 ---
 
-# Data
+## Data
 
-The supplied project data contains two season-level offensive datasets.
+The project uses the supplied datasets:
 
 ```text
 data/
-│
 ├── season_aggregates/
 │   ├── SPAIN_2024-2025_shots_offense.csv
 │   └── SPAIN_2024-2025_picks_offense.csv
-│
 └── glossary/
     └── metric_glossary.csv
 ```
 
----
-
-## Shooting Data
-
-The shooting dataset contains aggregated player-level information including:
-
-- field-goal attempts;
-- field goals made;
-- scoring;
-- shooting-zone distribution;
-- shooting efficiency;
-- contested attempts;
-- uncontested attempts;
-- catch-and-shoot attempts;
-- off-dribble attempts;
-- blocked attempts.
-
----
-
-## Pick-and-Roll Data
-
-The pick-and-roll dataset contains aggregate offensive PnR information for players operating as:
-
-- ball handlers;
-- screeners;
-- or both.
-
----
-
-# Dataset Integration
-
-The shooting and pick-and-roll datasets are joined using:
-
-```python
-player_id
-```
-
-An **outer join** is intentionally used so that players appearing in only one dataset are not silently discarded.
+The shooting and PnR datasets are joined using `player_id`.
 
 ```python
 profiles = shots.merge(
@@ -272,833 +133,206 @@ profiles = shots.merge(
 
 ### Why an outer join?
 
-A player may have a valid shooting profile while recording limited or no pick-and-roll activity.
-
-Using an inner join would remove these players completely from the combined dataset.
-
-An outer join preserves all available offensive information.
+Players with valid shooting data but limited PnR involvement should not disappear from the analysis.
 
 ### Why `validate="one_to_one"`?
 
-The expected relationship between the two datasets is one record per player.
-
-Merge validation protects against unexpected duplicate player IDs accidentally multiplying rows and producing incorrect statistics.
+It protects against unexpected duplicate player IDs silently multiplying rows during the merge.
 
 ---
 
-# Analytical Philosophy
+# Analytical Approach
 
-The project follows one central principle:
+## Volume + Efficiency
 
-> **Basketball metrics should be interpreted in context.**
+A core design principle is:
 
-A percentage alone does not fully describe player performance.
+> **Efficiency should not be interpreted without workload.**
 
-The dashboard therefore considers several dimensions together:
+For example:
 
 ```text
-Volume
-   +
-Efficiency
-   +
-Shot Profile
-   +
-Creation Style
-   +
-Role
-   +
-Sample Size
-   +
-League Context
+Player A: 4/8 from three = 50%
+Player B: 80/200 from three = 40%
 ```
+
+A raw percentage leaderboard ranks Player A higher despite the much smaller sample.
+
+The dashboard therefore combines:
+
+- raw volume;
+- per-game volume;
+- efficiency;
+- qualification thresholds;
+- reliability;
+- stabilized estimates.
 
 ---
 
-# Shooting Volume
+## Key Shooting Metrics
 
-## Attempts Per Game
-
-Season totals can partially reflect the number of games played.
-
-Therefore:
-
-```text
-Attempts Per Game = Total Attempts / Appearances
-```
-
-is used alongside total attempts.
-
-### Why?
-
-Consider two players:
-
-```text
-Player A:
-300 attempts in 30 games
-= 10 attempts/game
-
-Player B:
-300 attempts in 15 games
-= 20 attempts/game
-```
-
-Their season shooting volume is identical, but their offensive responsibility is very different.
-
-Using both total volume and per-game volume provides better context.
-
----
-
-# Field Goal Percentage
-
-Field Goal Percentage remains useful because it is intuitive and especially informative when evaluating individual shooting zones.
-
-However, overall FG% has an important limitation:
-
-> **Two-point and three-point field goals are treated equally.**
-
-Therefore, additional efficiency metrics are required.
-
----
-
-# Effective Field Goal Percentage
-
-Effective Field Goal Percentage accounts for the additional scoring value of three-point makes.
+### Effective Field Goal Percentage
 
 ```text
 eFG% = (FGM + 0.5 × 3PM) / FGA
 ```
 
-### Why use eFG%?
+eFG% accounts for the additional value of three-point shots and is therefore more informative than overall FG% when comparing shooting efficiency.
 
-Consider:
+### True Shooting Percentage
 
-```text
-Player A:
-5/10 shooting
-All two-pointers
-FG% = 50%
-Points = 10
+TS% incorporates field goals and free throws, providing a broader measure of scoring efficiency.
 
-Player B:
-5/10 shooting
-All three-pointers
-FG% = 50%
-Points = 15
-```
+### Shot Profile
 
-FG% treats both performances equally.
-
-eFG% recognizes that the second player generated more scoring value from the same number of attempts.
-
----
-
-# True Shooting Percentage
-
-True Shooting Percentage provides a broader measure of scoring efficiency by incorporating:
-
-- two-point shots;
-- three-point shots;
-- free throws.
-
-### Why use TS%?
-
-Players generate scoring value in different ways.
-
-Some rely heavily on three-point shooting, while others attack the basket and draw fouls.
-
-TS% provides a more complete scoring-efficiency measure than field-goal percentage alone.
-
----
-
-# Shot Profile
-
-The dashboard evaluates four main shooting zones:
+Players are evaluated across:
 
 ```text
 Rim
-
 Short Mid-Range / Paint
-
 Long Mid-Range
-
 Three-Point Range
 ```
 
-For each zone, the application separates two questions.
+Both **frequency** and **efficiency** are considered because shot selection and shot-making are different skills.
 
-### Frequency
+### Shot Creation
 
-> **How often does the player shoot from this area?**
-
-### Efficiency
-
-> **How successful is the player when shooting from this area?**
-
-This distinction is important because:
-
-> **Shot preference and shot-making ability are different characteristics.**
-
-For example, a player may be an excellent rim finisher but reach the rim very infrequently.
+Catch-and-shoot and off-dribble metrics help distinguish players who primarily provide spacing from players with greater self-creation responsibility.
 
 ---
 
-# Shot Creation Style
+## Pick-and-Roll Metrics
 
-The application distinguishes between:
+PnR analysis combines both production and decision-making.
 
-```text
-Catch-and-Shoot
+Important metrics include:
 
-Off-Dribble
-```
+- Points per pick
+- Pick volume
+- Shot rate
+- Pass rate
+- Assist-opportunity rate
+- Turnover rate
 
-attempts and efficiency.
+Turnover percentile direction is reversed because:
 
-### Why?
-
-Overall shooting efficiency does not explain **how shots are created**.
-
-A high catch-and-shoot share can indicate a floor-spacing role.
-
-Strong off-dribble volume and efficiency can indicate greater self-creation responsibility.
-
-Therefore, two players with similar overall efficiency may perform very different offensive roles.
-
----
-
-# Rim Pressure
-
-Rim pressure is evaluated using a combination of indicators such as:
-
-- rim attempt frequency;
-- rim finishing;
-- free-throw generation;
-- overall offensive workload.
-
-The objective is to distinguish between:
-
-```text
-Players who finish efficiently at the rim
-```
-
-and
-
-```text
-Players who consistently generate pressure toward the basket
-```
-
-These are related but different offensive skills.
-
----
-
-# Blocked-Shot Vulnerability
-
-The dataset contains player-level blocked attempts.
-
-A blocked-shot rate is therefore calculated relative to shooting volume rather than using raw block totals alone.
-
-### Why?
-
-Raw totals are heavily influenced by opportunity.
-
-A player taking 400 shots naturally has more opportunities to be blocked than someone taking 50.
-
-Using a rate provides better context.
-
----
-
-# Contested vs Uncontested Shooting
-
-Where supported by the supplied data, shooting efficiency is separated into:
-
-```text
-Contested Attempts
-
-Uncontested Attempts
-```
-
-This provides useful information about player performance under different defensive contexts.
-
-However:
-
-> **Contest status should not be interpreted as a complete shot-difficulty model.**
-
-The dataset does not include variables such as:
-
-- defender distance;
-- number of nearby defenders;
-- shot-clock pressure;
-- release speed;
-- player movement.
-
-Two shots labelled as contested may therefore represent very different levels of difficulty.
-
----
-
-# Pick-and-Roll Metrics
-
-Pick-and-roll analysis is separated by role because ball handlers and screeners perform different functions within the same action.
-
----
-
-## Pick Volume
-
-Measures how frequently the player participates in pick-and-roll actions.
-
-Volume represents offensive responsibility and opportunity.
-
----
-
-## Picks Per Game
-
-Provides a workload-adjusted measure of PnR involvement.
-
-```text
-Picks Per Game = Total Picks / Appearances
-```
-
----
-
-## Points Per Pick
-
-Measures scoring production relative to pick involvement.
-
-### Why?
-
-Raw points reward players simply for receiving more opportunities.
-
-Points per pick complements volume by providing an efficiency measure.
-
----
-
-## Shot Rate
-
-Measures how frequently the player ends the pick action with a shot.
-
-This can help distinguish:
-
-```text
-Scoring-oriented handlers
-```
-
-from
-
-```text
-Pass-oriented creators
-```
-
----
-
-## Pass Rate
-
-Measures how frequently a ball handler distributes the ball rather than directly finishing the action.
-
-This contributes to understanding a player's PnR decision-making style.
-
----
-
-## Assist-Opportunity Rate
-
-Provides information about how frequently the player creates potential scoring opportunities for teammates.
-
-### Why use it?
-
-Scoring efficiency alone cannot fully describe offensive creation.
-
-A player may generate significant value through passing even when they do not record the final shot.
-
----
-
-## Turnover Rate
-
-Turnover rate represents possession risk.
-
-Unlike most offensive metrics:
-
-> **Lower turnover rate is better.**
-
-Therefore, percentile calculations involving turnover performance reverse the direction so that better ball security receives the higher percentile.
-
----
-
-## Successful-Action Rate
-
-Successful-action rate provides another indicator of how frequently positive outcomes occur during pick-and-roll actions.
-
-It is considered alongside efficiency and workload rather than replacing either.
-
----
-
-# Volume vs Efficiency
-
-One of the core analytical principles of the project is:
-
-> **Efficiency should not be interpreted without volume.**
-
-Consider:
-
-```text
-Player A:
-4/8 from three
-50%
-
-Player B:
-80/200 from three
-40%
-```
-
-A simple three-point percentage leaderboard ranks Player A higher.
-
-However, there is substantially more evidence supporting Player B's percentage.
-
-The dashboard addresses this through:
-
-1. qualification thresholds;
-2. volume metrics;
-3. rate metrics;
-4. percentile eligibility;
-5. reliability indicators;
-6. stabilized shooting estimates.
+> **Lower turnover rate represents better performance.**
 
 ---
 
 # Sample-Size Handling
 
-Because the dataset contains season-level aggregates, percentages based on limited opportunities can become misleading.
+Season aggregate data can create misleading extreme percentages when opportunity counts are small.
 
-The application therefore includes configurable minimum thresholds for:
+The application therefore uses configurable minimum thresholds for:
 
 - appearances;
-- total field-goal attempts;
-- zone attempts;
+- total attempts;
+- shooting-zone attempts;
 - catch-and-shoot attempts;
 - off-dribble attempts;
-- pick-and-roll involvement;
-- defensive coverage samples;
-- screen-location samples.
+- PnR involvement;
+- coverage and screen-location samples.
 
-Low-volume players can remain visible where useful, but they are not automatically treated as equally reliable comparisons with established high-volume players.
-
----
-
-# Qualified Percentiles
-
-Percentiles are calculated only among players who satisfy the qualification criteria for the relevant metric.
-
-### Why?
-
-Consider:
-
-```text
-Player A:
-3/5 from three
-60%
-
-Player B:
-90/220 from three
-40.9%
-```
-
-Without qualification thresholds, Player A may receive an elite three-point percentile despite having only five attempts.
-
-The application therefore uses metric-specific eligibility rules.
-
-Different metrics require different underlying event counts.
+Percentiles are calculated only among players meeting the relevant qualification criteria.
 
 ---
 
-# Reliability
+## Reliability
 
-The application includes sample-reliability indicators based on relevant opportunity counts.
+Reliability indicators communicate how much observational support exists behind a player's metric.
 
-Reliability is intended to answer:
+They should **not** be interpreted as formal confidence intervals or probabilities of true ability.
 
-> **How much observational support exists behind this player's metric?**
-
-Reliability should **not** be interpreted as:
-
-- a confidence interval;
-- statistical significance;
-- probability that the metric represents true ability.
-
-Instead, it acts as an intuitive warning when performance is based on limited observations.
+Instead, they provide a warning when a result is based on limited data.
 
 ---
 
-# Stabilized Zone Finishing
+## Stabilized Zone Efficiency
 
-Raw shooting percentages can be unstable for players with limited attempts.
-
-To reduce extreme small-sample estimates, zone efficiency is stabilized toward the league-average shooting percentage for that zone.
+Zone shooting percentages are stabilized toward the league average to reduce the impact of extreme small samples.
 
 Conceptually:
 
 ```text
 Stabilized FG%
-
 =
-
 (Player Makes + Prior Weight × League FG%)
-
 /
-
 (Player Attempts + Prior Weight)
 ```
 
-The current implementation uses a:
+The current implementation uses a **30-attempt prior**.
 
-```text
-30-attempt prior
-```
+As sample size increases, the player's observed performance receives more influence.
 
----
-
-## Why Stabilize Shooting Percentage?
-
-Consider:
-
-```text
-Player A:
-3 / 4 at the rim
-75%
-
-Player B:
-120 / 200 at the rim
-60%
-```
-
-A raw leaderboard suggests Player A is the superior finisher.
-
-However, four attempts provide very little evidence.
-
-Stabilization moves small samples closer to the league average.
-
-As attempt volume increases, the player's observed percentage receives progressively more influence.
+The prior is a pragmatic analytical choice rather than an empirically optimized parameter.
 
 ---
 
-## Prior Assumption
+## Shot-Making Over Expected
 
-The 30-attempt prior is a pragmatic analytical choice rather than an empirically optimized parameter.
+Stabilized player finishing is compared against league efficiency by shooting zone.
 
-With multiple seasons of player data, the prior could instead be estimated using:
+This helps distinguish whether offensive efficiency comes from:
 
-- historical metric stability;
-- year-to-year correlations;
-- predictive performance;
-- cross-validation.
+- taking efficient shots;
+- finishing above league expectation;
+- or both.
 
----
-
-# Shot-Making Over Expected
-
-The application compares stabilized player zone efficiency with the corresponding league expectation.
-
-Conceptually:
-
-```text
-Shot-Making Over Expected
-
-=
-
-Observed / Stabilized Player Efficiency
-
--
-
-League Expected Efficiency
-```
-
-### Purpose
-
-Two players can have similar overall FG% while taking very different shot distributions.
-
-This comparison adds context about whether a player's performance comes primarily from:
-
-```text
-Efficient shot selection
-```
-
-or
-
-```text
-Above-average finishing
-```
-
-or
-
-```text
-A combination of both
-```
+This is a **descriptive metric**, not a complete expected-shot model, because the aggregate dataset does not contain defender distance, shot-clock state, player movement, or exact shot coordinates.
 
 ---
 
-## Important Limitation
+# Composite Scouting Indicators
 
-This metric should be interpreted as a **descriptive shot-making indicator**, not a complete expected-shot model.
-
-The aggregate dataset does not contain:
-
-- defender distance;
-- shot clock;
-- movement state;
-- pass type;
-- possession sequence;
-- detailed shot coordinates.
-
-Therefore, "expected" refers to the available shooting-zone context rather than full shot difficulty.
-
----
-
-# Offensive Style Labels
-
-Players are assigned descriptive offensive-style labels using combinations of observed metrics.
-
-These classifications are designed to make the player pool easier for scouts to explore.
-
-They should be interpreted as:
-
-> **Descriptive summaries rather than definitive positions or machine-learned archetypes.**
-
-The objective is to help identify players with similar headline numbers but different offensive behaviors.
-
----
-
-# Role-Specific Percentiles
-
-Percentile comparisons are calculated within meaningful offensive populations.
-
-Examples:
-
-```text
-Ball-handler creation metrics
-→ compared with qualified handlers
-
-Screener metrics
-→ compared with qualified screeners
-
-Shooting metrics
-→ compared with qualified shooters
-```
-
-### Why?
-
-A percentile is only meaningful when the comparison population is meaningful.
-
-Comparing a low-volume screener with a primary ball handler on identical creation metrics would provide limited scouting value.
-
----
-
-# Player Similarity
-
-The Player Profile page identifies statistical neighbors using shared percentile dimensions.
-
-A minimum number of shared dimensions is required before similarity is calculated.
-
-### Purpose
-
-Player similarity is intended as a **scouting discovery tool**.
-
-It helps answer:
-
-> **Which players have a similar offensive statistical profile?**
-
-This can help scouts identify:
-
-- comparable players;
-- alternative recruitment targets;
-- potential role replacements;
-- similar offensive archetypes.
-
-However:
-
-> Statistical similarity does not necessarily mean tactical or stylistic equivalence.
-
-Video analysis and contextual scouting remain necessary.
-
----
-
-# Composite Scouting Scores
-
-The application includes several exploratory role-fit or composite indicators.
-
-Examples include profiles oriented toward:
+The application also contains exploratory profiles such as:
 
 ```text
 Primary Creator
-
 Floor Spacer
-
 Rim Pressure
-
 Screen-and-Roll Big
-
 Versatile Scorer
 ```
 
-These indicators combine multiple metrics using explicit heuristic weights.
+These scores combine multiple relevant metrics using transparent heuristic weights.
+
+They are intended as:
+
+> **Scouting filters, not predictive models of total player value.**
+
+With richer historical data, these weights could instead be learned or validated using future performance or expert scouting labels.
 
 ---
 
-## Why Use Composite Scores?
+# Data Quality
 
-Basketball scouting often involves multi-dimensional questions.
+The analytical pipeline includes:
 
-For example:
+- Required-column validation
+- Safe division
+- Missing-value handling
+- One-to-one merge validation
+- Preservation of players appearing in only one source dataset
+- Cached data preparation
 
-> **Which players could function as primary creators?**
-
-A single statistic cannot fully answer that question.
-
-A primary-creator profile may therefore consider:
-
-- PnR creation;
-- PnR workload;
-- shooting volume;
-- off-dribble efficiency;
-- turnover control.
+Percentage fields remain on their original `0–1` scale internally and are converted to percentage points only for display.
 
 ---
 
-## Important Interpretation
-
-The composite scores are:
-
-> **Scouting aids, not predictive player-value models.**
-
-The weights are transparent analytical assumptions.
-
-They are **not learned from labelled outcomes**.
-
-With richer historical data, the weights could instead be:
-
-- validated against future performance;
-- optimized using predictive models;
-- calibrated using expert scouting labels;
-- customized to a team's tactical philosophy.
-
-The current implementation keeps these assumptions explicit rather than presenting heuristic scores as objective truths.
-
----
-
-# Percentage Convention
-
-Percentage and rate fields from the source data are stored internally as values between:
-
-```text
-0 and 1
-```
-
-For example:
-
-```text
-0.382
-```
-
-represents:
-
-```text
-38.2%
-```
-
-Internally, metrics remain on the original `0–1` scale.
-
-They are converted to percentage points only for display.
-
-### Why?
-
-This prevents repeated transformations and reduces the risk of accidentally mixing:
-
-```text
-0.38
-```
-
-with:
-
-```text
-38
-```
-
-during calculations.
-
----
-
-# Data Quality and Defensive Programming
-
-Several safeguards are included in the analytical pipeline.
-
----
-
-## Required-Column Validation
-
-Expected source fields are checked before transformations are performed.
-
-If required columns are missing, the application raises an explicit error instead of silently producing incomplete analysis.
-
----
-
-## Safe Division
-
-Rate calculations protect against zero denominators.
-
-Invalid divisions produce missing values rather than:
-
-```text
-Infinity
-```
-
-or misleading zeros.
-
----
-
-## Join Validation
-
-The shooting and pick-and-roll datasets use:
-
-```python
-validate="one_to_one"
-```
-
-during the merge.
-
-This protects against duplicated identifiers accidentally multiplying player records.
-
----
-
-## Missing Cross-Dataset Players
-
-An outer join preserves players appearing in only one source dataset.
-
-This ensures that:
-
-```text
-No PnR record
-```
-
-does not automatically mean:
-
-```text
-Remove player from shooting analysis
-```
-
-and vice versa.
-
----
-
-# Project Architecture
-
-The application separates analytics from Streamlit presentation logic.
+# Project Structure
 
 ```text
 Basketball_Offensive_Analysis/
 │
 ├── app.py
-│
 ├── analytics.py
 ├── ui.py
 ├── usage_tracking.py
 ├── admin_auth.py
 ├── requirements.txt
-├── README.md
 │
 ├── pages/
 │   ├── shooting_analysis.py
@@ -1107,410 +341,136 @@ Basketball_Offensive_Analysis/
 │   └── admin_analytics.py
 │
 └── data/
-    ├── season_aggregates/
-    │   ├── SPAIN_2024-2025_shots_offense.csv
-    │   └── SPAIN_2024-2025_picks_offense.csv
-    │
-    └── glossary/
-        └── metric_glossary.csv
 ```
 
----
+### `analytics.py`
 
-# Module Responsibilities
+Contains:
 
-## `analytics.py`
-
-Responsible for:
-
-- loading datasets;
-- required-column validation;
-- data cleaning;
+- data loading and validation;
 - derived metrics;
-- safe rate calculations;
-- sample-size rules;
 - percentile calculations;
+- qualification logic;
 - reliability;
 - stabilized shooting;
-- offensive classifications;
-- player similarity;
-- composite scouting indicators.
+- player classifications;
+- similarity calculations.
 
----
+### `pages/`
 
-## `pages/`
+Contains the Streamlit interface.
 
-Contains the analyst-facing Streamlit views.
-
-Separating analytical transformations from UI code reduces duplication and improves maintainability.
-
----
-
-## `ui.py`
-
-Contains reusable interface and presentation components.
-
----
-
-## `usage_tracking.py`
-
-Handles local user-product interaction events for the optional administrator analytics system.
-
----
-
-## `admin_auth.py`
-
-Contains the authentication logic associated with the administrator prototype.
+Keeping the analytical transformations separate from the UI improves modularity and maintainability.
 
 ---
 
 # Performance
 
-Streamlit reruns the Python application whenever the user interacts with a widget.
+Data preparation uses Streamlit caching so filter changes do not unnecessarily rerun the complete data-processing pipeline.
 
-To avoid repeatedly processing the same source data, data preparation is cached.
-
-Caching improves responsiveness for actions such as:
-
-- changing qualification thresholds;
-- selecting players;
-- changing teams;
-- modifying chart variables;
-- changing filters.
-
-The cache also considers source-file modification timestamps so updated data can invalidate previously cached transformations.
+Cache invalidation also considers changes to the source files.
 
 ---
 
-# Installation
+# Running Locally
 
-## Requirements
-
-- Python 3.10+
-- pip
-
----
-
-## Clone Repository
+Clone the repository:
 
 ```bash
 git clone https://github.com/arvindnair-04/Basketball_Offensive_Analysis.git
 cd Basketball_Offensive_Analysis
 ```
 
----
+Create a virtual environment:
 
-## Create Virtual Environment
+```bash
+python -m venv .venv
+```
 
-### Windows PowerShell
+Activate it.
+
+### Windows
 
 ```powershell
-python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
----
+### macOS / Linux
 
-## Install Dependencies
+```bash
+source .venv/bin/activate
+```
+
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
-
-## Run Application
+Run the application:
 
 ```bash
 streamlit run app.py
 ```
 
-The application is self-contained.
-
-The core analytical application does **not** require:
-
-- external APIs;
-- cloud credentials;
-- paid services;
-- external analytical databases.
+The core analysis is self-contained and requires no external APIs, cloud credentials, or paid services.
 
 ---
 
-# Authentication
+# Admin Analytics — Bonus Feature
 
-The application contains a lightweight local authentication system.
+A separate administrator interface tracks product usage, including:
 
-Users can create an account from the application interface.
-
-Authentication data is stored using a local SQLite database.
-
-The authentication functionality primarily supports the optional administrator product-analytics prototype while keeping the project self-contained.
-
----
-
-## Production Consideration
-
-The local authentication system is a prototype.
-
-For a production environment, user authentication and persistence should be moved to a secure external identity and database service.
-
-Administrator passwords or other secrets should **not** be committed to the public repository.
-
-Potential production approaches include:
-
-- environment variables;
-- Streamlit Secrets;
-- managed authentication providers;
-- external databases.
-
----
-
-# Administrator Usage Analytics — Bonus Feature
-
-A separate administrator analytics interface was developed to explore how users interact with the scouting product.
-
-Tracked events include:
-
-- successful login;
-- logout;
-- navigation between analytical pages;
+- logins;
+- page visits;
 - player-profile views;
-- player-comparison selections.
-
-The administrator dashboard can analyze:
-
-- registered users;
+- comparisons;
 - active users;
 - sessions;
-- page visits;
-- page popularity;
-- frequently viewed players;
-- daily activity;
-- user-by-page usage;
-- recent activity.
+- popular pages;
+- frequently viewed players.
 
----
+Streamlit reruns are handled so changing a filter is not automatically counted as another page visit.
 
-# Handling Streamlit Reruns
-
-Streamlit reruns the application script whenever a user interacts with a widget.
-
-For example:
-
-```text
-Changing minimum attempts
-```
-
-causes a rerun.
-
-However, this should **not** automatically be interpreted as another page visit.
-
-The usage-tracking implementation therefore de-duplicates page-view events to better distinguish:
-
-```text
-Actual navigation
-```
-
-from:
-
-```text
-Streamlit reruns
-```
-
-This improves the usefulness of the product-engagement analytics.
+Administrator credentials should be configured securely and are intentionally not documented in the public README.
 
 ---
 
 # Data Limitations
 
-The dashboard is deliberately constrained by what can be supported by the supplied season-level aggregate datasets.
+The supplied data contains season-level aggregates rather than possession-level events.
 
----
+Therefore, the application cannot fully evaluate:
 
-## 1. No Possession-Level Sequences
-
-The data contains aggregated season statistics rather than individual possession events.
-
-Therefore, the dashboard can analyze:
-
-- where players shoot;
-- how frequently they shoot;
-- how efficiently they shoot;
-- aggregate PnR behavior;
-- season-level offensive tendencies.
-
-It cannot reconstruct the exact sequence of decisions within an individual possession.
-
----
-
-## 2. Contest Does Not Fully Measure Shot Difficulty
-
-The dataset contains contested and uncontested classifications.
-
-It does not contain:
-
+- possession sequences;
+- exact PnR decisions;
+- detailed shot difficulty;
 - defender distance;
-- number of nearby defenders;
 - shot-clock pressure;
-- release speed;
-- shooter movement.
+- exact blocked-shot locations;
+- exact spatial relationships between PnR and shooting zones.
 
-Therefore:
-
-> **Contested vs uncontested should be interpreted as contextual information rather than a complete shot-quality model.**
+The dashboard avoids creating unsupported precision when these variables are unavailable.
 
 ---
 
-## 3. Blocked Shots Are Player-Level Totals
+# Future Development
 
-Blocked attempts are available at player level.
+With possession-level event or tracking data, this project could be extended with:
 
-The dataset does not provide exact shooting-zone locations for every blocked attempt.
+- Expected shot quality
+- PnR decision-quality modelling
+- Defensive reaction analysis
+- Spacing and driving-lane analysis
+- Screen geometry
+- Player movement context
+- Multi-season reliability modelling
 
-Therefore, the application does **not** fabricate zone-level blocked-shot information.
-
----
-
-## 4. PnR Attempts Cannot Be Perfectly Mapped to Shooting Zones
-
-Pick-and-roll shooting data distinguishes broader shot categories.
-
-The shooting dataset contains more detailed zones such as:
-
-```text
-Rim
-Short Mid-Range / Paint
-Long Mid-Range
-Three
-```
-
-The exact detailed location of each aggregate pick-and-roll two-point attempt cannot therefore be reconstructed.
+A further product extension could allow scouts to query the dataset using natural language while restricting answers to metrics supported by the available data.
 
 ---
 
-## 5. Statistical Association Is Not Causation
-
-The dashboard describes observed offensive performance.
-
-For example:
-
-```text
-A player performs well on contested attempts
-```
-
-does not prove:
-
-```text
-The player is inherently better under defensive pressure
-```
-
-Additional contextual, longitudinal and possession-level data would be necessary for causal claims.
-
----
-
-# What I Would Add With Richer Data
-
-With possession-level event or tracking data, the project could be expanded substantially.
-
----
-
-## Expected Shot Quality
-
-A shot-quality model could include:
-
-- exact location;
-- defender distance;
-- shot-clock state;
-- shooter movement;
-- pass type;
-- possession context;
-- player identity.
-
----
-
-## Pick-and-Roll Decision Quality
-
-Possession sequences could evaluate whether the handler:
-
-- shot;
-- passed;
-- rejected the screen;
-- used the screen;
-- attacked the rim;
-- found the roller;
-- found the popper;
-- created an advantage;
-- turned the ball over.
-
----
-
-## Spatial Analysis
-
-Tracking data could support analysis of:
-
-- offensive spacing;
-- driving lanes;
-- defensive collapse;
-- screen geometry;
-- separation created;
-- defensive rotations;
-- off-ball gravity.
-
----
-
-## Longitudinal Reliability
-
-Multiple seasons could be used to estimate:
-
-- metric stability;
-- optimal shrinkage strength;
-- predictive reliability;
-- player-development trajectories.
-
----
-
-# Future Product Development
-
-A potential extension is an **AI-assisted basketball analytics interface**.
-
-This would allow analysts to query the available data using natural language.
-
-Example requests:
-
-```text
-Show high-volume shooters with above-average true shooting.
-```
-
-```text
-Find ball handlers with strong PnR efficiency and low turnover rates.
-```
-
-```text
-Compare this player's rim, mid-range and three-point usage.
-```
-
-```text
-Which players have a similar offensive profile?
-```
-
-The assistant would be restricted to calculations supported by the available dataset.
-
-It would:
-
-1. identify relevant variables;
-2. check whether the requested analysis is possible;
-3. apply sample-size rules;
-4. perform the analysis;
-5. generate an appropriate visualization;
-6. explain assumptions;
-7. flag unsupported requests.
-
-The objective would be to improve analytical accessibility without sacrificing methodological transparency.
-
----
-# Technology Stack
-
-The project uses:
+# Technology
 
 ```text
 Python
@@ -1519,49 +479,26 @@ NumPy
 Streamlit
 Plotly
 SQLite
-Git
-GitHub
+Git / GitHub
 ```
 
 ---
-
-# Reproducibility
-
-The analytical application can be reproduced with:
-
-```bash
-pip install -r requirements.txt
-streamlit run app.py
-```
-
-All analytical data required for the assignment is included locally.
-
-The core scouting application requires no external APIs or cloud services.
-
----
-
 
 # Final Perspective
 
-The objective of this project is **not** to identify the "best" offensive player using one number.
-
-Instead, it attempts to make player evaluation more structured.
-
-The dashboard helps move the analyst from:
+The project is designed to move a scout from:
 
 > **"Who has interesting numbers?"**
 
-toward:
+to:
 
 > **"Why is this player interesting, how do they create offensive value, how reliable is the evidence, and who should I investigate further?"**
 
-That distinction is the central analytical philosophy behind the project.
+That is the central analytical philosophy behind the application.
 
 ---
 
-# Author
+## Author
 
-**Arvind Nair**
-
-M.S. Computer Science  
-Rochester Institute of Technology
+**Arvind Nair**  
+M.S. Computer Science — Rochester Institute of Technology
