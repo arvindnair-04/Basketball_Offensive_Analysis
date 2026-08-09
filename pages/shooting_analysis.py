@@ -267,7 +267,7 @@ with context_tab:
             )
             creation_fig = style_figure(creation_fig, height=390)
             creation_fig.update_layout(title_text="")
-            st.plotly_chart(style_figure(creation_fig, height=450), width="stretch", key="creation_scatter")
+            st.plotly_chart(creation_fig, width="stretch", key="creation_scatter")
 
 metric_glossary_block([
     ("eFG%", "Shooting percentage adjusted so made three-pointers receive extra credit for being worth three points."),
