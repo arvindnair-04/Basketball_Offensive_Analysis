@@ -343,25 +343,6 @@ Basketball_Offensive_Analysis/
 └── data/
 ```
 
-### `analytics.py`
-
-Contains:
-
-- data loading and validation;
-- derived metrics;
-- percentile calculations;
-- qualification logic;
-- reliability;
-- stabilized shooting;
-- player classifications;
-- similarity calculations.
-
-### `pages/`
-
-Contains the Streamlit interface.
-
-Keeping the analytical transformations separate from the UI improves modularity and maintainability.
-
 ---
 
 # Performance
