@@ -365,7 +365,7 @@ with pnr_tab:
             st.plotly_chart(fig, width="stretch", key=f"profile_{role_key}_outcomes")
 
 with similar_tab:
-    st.markdown("#### Similar Players")
+    chart_heading("Similar Players", "Uses euclidean distance to get similar player profile.")
     comparisons = closest_comparisons(profiles, selected_id, limit=8)
     if comparisons.empty:
         st.info("Not enough qualified dimensions are available to find reliable comparisons.")
